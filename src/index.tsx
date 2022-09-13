@@ -15,11 +15,9 @@ root.render(
   
   <React.StrictMode>
     <RecoilRoot>
-    <QueryClientProvider client={queryClient}>
-      
-      <App />
-      
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </RecoilRoot>
   </React.StrictMode>
   
