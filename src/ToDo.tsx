@@ -45,8 +45,13 @@ function Todo(){
             <input {...register("email", {
                 required:"This is required.",
                 
-                validate:(value)=>
-                    value.includes('iteach12') ? "You can't use this email" : true
+                validate:
+                {
+                    iteach12:(value)=>
+                    value.includes('iteach12') ? "You can't use this email" : true,
+                    griteach22:(value)=>
+                    value.includes('griteach22') ? "You can't use this email" : true
+                }
                  })}  placeholder="Email" />
             <ErrorMessage 
                 errors={errors} 

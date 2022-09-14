@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import {lightTheme} from './theme';
 import { useRecoilValue } from 'recoil';
 import Todo from './ToDo';
+import TodoList from './ToDoList';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -81,7 +82,7 @@ function App() {
   
   return (<><ThemeProvider theme={lightTheme}>
     <GlobalStyle />
-    <Todo />
+    <TodoList />
     <ReactQueryDevtools initialIsOpen={true} />
     </ThemeProvider></>
   );
