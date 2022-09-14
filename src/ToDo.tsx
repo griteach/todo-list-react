@@ -18,24 +18,36 @@ interface IForm {
     passWord:string,
     passWord2:string,
     singleErrorInput:string,
+    extraError:string,
 }
 
 function Todo(){
-    const { register, handleSubmit, formState:{errors} } = useForm<IForm>({
+    const { register, handleSubmit, formState:{errors}, setError } = useForm<IForm>({
         defaultValues:{
             email:"@gmail.com",
             firstName:"이름",
             lastName:"성",
+            home:"Wonju"
             
 
         }
     }); //register function
-    const onValid = (data:IForm) => console.log(data);
+    const onValid = (data:IForm) => {
+        if(data.passWord !== data.passWord2){
+            setError("passWord", {message:"Password are not the same."}, {shouldFocus:true})
+        }
+        
+    }
     
     
     return <div>
         <form style={{display:"flex", flexDirection: "column"}} onSubmit={handleSubmit(onValid)}>
-            <input {...register("email", {required:"This is required."})}  placeholder="Email" />
+            <input {...register("email", {
+                required:"This is required.",
+                
+                validate:(value)=>
+                    value.includes('iteach12') ? "You can't use this email" : true
+                 })}  placeholder="Email" />
             <ErrorMessage 
                 errors={errors} 
                 name="email" 
@@ -70,7 +82,7 @@ function Todo(){
                 }
             />
             <input {...register("passWord2", {
-                required:true, 
+                required:"Password is requried.", 
                 minLength:{
                     value:5,
                     message:"This is too short.",
@@ -86,9 +98,8 @@ function Todo(){
                     ({message}) => <ErrorMessagePargraph>{message}</ErrorMessagePargraph>
                 }
             />
+            
             <input type="submit" value="Add" />
-
-
         </form>
 
     </div>;
