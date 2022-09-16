@@ -1,7 +1,22 @@
 import { ErrorMessage } from '@hookform/error-message';
 import {useForm} from 'react-hook-form';
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+
+
+const toDoState = atom({
+    key:"toDo",
+    default:[],
+})
+
 
 const ToDoList = () => {
+
+    const [toDos, setTodos] = useRecoilState(toDoState);
+    //만들어둔 atom에서 값을 가져와 사용하는 방법
+    // const value = useRecoilValue(toDoState);
+    //atom에 저장된 값을 변경하고 싶을 때 사용하는 함수
+    // const modFn = useSetRecoilState(toDoState);
+
 
 
     //인터페이스를 이용해서 useForm에서 사용할 데이터의 타입을 만들어 준다.
@@ -27,6 +42,7 @@ const ToDoList = () => {
         setValue
         } = useForm<IForm>();
     return <div>
+        <h1>ToDos</h1>
         <form style={{display:"flex", flexDirection:"column"}} onSubmit={handleSubmit(onValid)}>
             <input {...register("toDo", {
                 required:"Please write something...",

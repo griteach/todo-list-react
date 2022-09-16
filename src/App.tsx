@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import {lightTheme} from './theme';
 import { useRecoilValue } from 'recoil';
 import Todo from './ToDo';
-import TodoList from './ToDoList';
+import TodoList from './components/ToDoList';
 
 
 const GlobalStyle = createGlobalStyle`
