@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 
 
-export interface ITodo{
+export interface IToDo{
     text:string;
     id:number;
     category: "DONE" | "DOING" | "TO_DO";
@@ -10,7 +10,7 @@ export interface ITodo{
 
 
 //recoil atom 만들기 (글로벌 스테이트)
-export const toDoState = atom<ITodo[]>({
+export const toDoState = atom<IToDo[]>({
     key:"toDo",
     default: [],
 })
