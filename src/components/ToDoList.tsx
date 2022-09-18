@@ -1,5 +1,5 @@
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { toDoState } from '../atoms';
+import { toDoSelector, toDoState } from '../atoms';
 import ToDo from './ToDo';
 import CreateToDo from './CreateToDo';
 
@@ -8,6 +8,9 @@ import CreateToDo from './CreateToDo';
 const ToDoList = () => {
 
     const toDos = useRecoilValue(toDoState);
+    const selectorOutput = useRecoilValue(toDoSelector);
+
+    console.log(selectorOutput);
     return <div>
         <h1>ToDos</h1>
         <hr></hr>
