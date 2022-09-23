@@ -1,7 +1,7 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
-import { useSetRecoilState } from 'recoil';
-import { toDoState } from '../atoms';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { categoryState, toDoState } from '../atoms';
 
 
 interface IForm{
@@ -13,10 +13,12 @@ interface IForm{
 function CreateToDo(){
 
     const setToDos = useSetRecoilState(toDoState);
+    const category = useRecoilValue(categoryState);
+    
     const {register, handleSubmit, setValue, formState:{errors}} = useForm<IForm>();
     const onValid = ({toDo}:IForm) => {
         console.log("add to do",toDo);
-        setToDos(oldTodos => [{text:toDo, id:Date.now() ,category:"TO_DO"}, ...oldTodos]);
+        setToDos(oldTodos => [{text:toDo, id:Date.now(), category}, ...oldTodos]);
         /**
          *  setValue를 통해서 값을 재지정. ("")은 빈칸으로 만들어서 입력폼을 비워준다. 다시 입력할 수 있도록.
          *  setValue가 onValid에 들어있는 이유는 정상적으로 submit이 되었기 때문이며, 
